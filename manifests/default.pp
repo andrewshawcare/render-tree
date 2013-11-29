@@ -8,9 +8,7 @@ class {'nodejs':
     version => '0.10.22-1chl1~precise1'
 }
 
-package {[
-    'git'
-]:
+package {'git':
     ensure => installed
 }
 
