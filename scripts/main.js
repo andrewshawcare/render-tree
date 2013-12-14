@@ -25,14 +25,19 @@ require(["backbone", "bootstrap"], function (Backbone) {
         var type = $.type(value);
 
         if (type === "array") {
-            var model = new Backbone.Model({collection: value});
-            var view = new ArrayView({model: model});
+            var view = new ArrayView({
+                collection: new Backbone.Collection(value)
+            });
         } else if (type === "object") {
-            var model = new Backbone.Model(value);
-            var view = new ObjectView({model: model});
+            var view = new ObjectView({
+                model: new Backbone.Model(value)}
+            );
         } else {
-            var model = new Backbone.Model({value: value});
-            var view = new ValueView({model: model});
+            var view = new ValueView({
+                model: new Backbone.Model({
+                    value: value
+                })
+            });
         }
 
         return view;
@@ -46,8 +51,8 @@ require(["backbone", "bootstrap"], function (Backbone) {
         render: function () {
             this.$el
                 .empty()
-                .append(this.model.get("collection").map(function (value) {
-                    return $("<li>").append(generateView($, value).el);
+                .append(this.collection.map(function (value) {
+                    return $("<li>").append(generateView($, value.toJSON()).el);
                 }));
         }
     });
@@ -77,16 +82,23 @@ require(["backbone", "bootstrap"], function (Backbone) {
         render: function () {
             this.$el
                 .empty()
+                .attr("contenteditable", true)
                 .text(this.model.get("value"));
         }
     });
 
     var renderEndpointJson = function () {
-        $.getJSON($("#url").val(), function (data) {
-            $("#collection")
-                .empty()
-                .append(generateView($, data).el);
-        });
+        $.ajax(
+            $("#url").val(), 
+            {
+                dataType: "jsonp",
+                success: function (data) {
+                    $("#collection")
+                        .empty()
+                        .append(generateView($, data).el);
+                }
+            }
+        );
     };
 
     $("#form").submit(function (event) {
