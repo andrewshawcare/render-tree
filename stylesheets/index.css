@@ -19,6 +19,18 @@ small {
     min-height: 8.2em;
 }
 
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 768px) {
+    #navbar-search {
+        overflow-y: auto !important;
+    }
+}
+
 .navbar-form {
     border: none;
 }
