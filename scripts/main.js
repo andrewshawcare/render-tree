@@ -44,33 +44,60 @@ require(["backbone", "bootstrap"], function (Backbone) {
     };
 
     var ArrayView = Backbone.View.extend({
-        tagName: "ul",
         initialize: function () {
+            this.$el.addClass("row")
             this.render();
         },
         render: function () {
             this.$el
                 .empty()
                 .append(this.collection.map(function (value) {
-                    return $("<li>").append(generateView($, value.toJSON()).el);
+                    return $("<div>")
+                        .addClass("col-md-6")
+                        .append(generateView($, value.toJSON()).el);
                 }));
         }
     });
 
     var ObjectView = Backbone.View.extend({
-        tagName: "dl",
+        tagName: "div",
         initialize: function () {
+            this.$imageEl = $("<img>")
+                .addClass("media-object img-rounded");
+
+            this.$alignImageEl = $("<a>")
+                .addClass("pull-left")
+                .attr("href", "#")
+                .append(this.$imageEl);
+
+            this.$mediaBodySubheading = $("<small>");
+
+            this.$mediaBodyHeading = $("<h4>")
+                .addClass("media-heading");
+
+            this.$audioEl = $("<audio>")
+                .attr("controls", true);
+
+            this.$bodyEl = $("<div>")
+                .addClass("media-body")
+                .append(this.$mediaBodyHeading)
+                .append(this.$audioEl);
+
+            this.$el
+                .addClass("media")
+                .append(this.$alignImageEl)
+                .append(this.$bodyEl);
+
             this.render();
         },
         render: function () {
-            this.$el
+            this.$imageEl.attr("src", this.model.attributes.artworkUrl100);
+            this.$mediaBodySubheading.text(this.model.attributes.artistName);
+            this.$mediaBodyHeading
                 .empty()
-                .append($.map(this.model.attributes, function (value, key) {
-                    return [
-                        $("<dt>").text(key),
-                        $("<dd>").append(generateView($, value).el)
-                    ];
-                }));
+                .text(this.model.attributes.trackName)
+                .append(this.$mediaBodySubheading);
+            this.$audioEl.attr("src", this.model.attributes.previewUrl);
         }
     });
 
@@ -89,19 +116,19 @@ require(["backbone", "bootstrap"], function (Backbone) {
 
     var renderEndpointJson = function () {
         $.ajax(
-            $("#url").val(), 
+            "http://itunes.apple.com/search?term=" + $("#term").val(), 
             {
                 dataType: "jsonp",
                 success: function (data) {
                     $("#collection")
                         .empty()
-                        .append(generateView($, data).el);
+                        .append(generateView($, data.results).el);
                 }
             }
         );
     };
 
-    $("#form").submit(function (event) {
+    $("#search").submit(function (event) {
         event.preventDefault();
         renderEndpointJson();
     });

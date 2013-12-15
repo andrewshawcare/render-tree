@@ -2,10 +2,19 @@ body {
     padding-top: 70px;
 }
 
-dl {
-    margin-left: 1em;
+#logo {
+    margin: -15px 0.5em -15px 0;
+    height: 36px;
 }
 
-dd {
-    margin-bottom: 0.5em;
+#collection {
+    margin: 1em 0;
+}
+
+small {
+    display: block;
+}
+
+.media {
+    min-height: 8.2em;
 }
