@@ -76,7 +76,8 @@ require(["backbone", "bootstrap"], function (Backbone) {
                 .addClass("media-heading");
 
             this.$audioEl = $("<audio>")
-                .attr("controls", true);
+                .attr("controls", true)
+                .attr("preload", "none");
 
             this.$bodyEl = $("<div>")
                 .addClass("media-body")
