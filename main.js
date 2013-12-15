@@ -1,16 +1,11 @@
 var url = require("url");
 var express = require("express");
 
-var serverUrl = {
-    protocol: "http:",
-    slashes: true,
-    hostname: "localhost",
-    port: "8080"
-};
+var port = process.env.PORT || 5000;
 
 var application = express();
 
 application.use(express.static(__dirname));
-application.listen(serverUrl.port);
+application.listen(port);
 
-console.log("Server listening at " + url.format(serverUrl));
+console.log("Server listening on " + port);
