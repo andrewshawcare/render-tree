@@ -18,3 +18,7 @@ small {
 .media {
     min-height: 8.2em;
 }
+
+.navbar-form {
+    border: none;
+}
