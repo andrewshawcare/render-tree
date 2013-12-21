@@ -12,4 +12,5 @@ render-tree
 
 1. `vagrant up`
 2. `vagrant ssh`
-3. `node main.js`
+3. `cd ~/vagrant`
+4. `node main.js`
