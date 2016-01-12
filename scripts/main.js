@@ -1,9 +1,9 @@
 requirejs.config({
     paths: {
-        backbone: "../bower_components/backbone/backbone",
-        bootstrap: "../bower_components/bootstrap/dist/js/bootstrap",
-        jquery: "../bower_components/jquery/jquery",
-        underscore: "../bower_components/underscore/underscore"
+        backbone: "../lib/backbone/backbone",
+        bootstrap: "../lib/bootstrap/dist/js/bootstrap",
+        jquery: "../lib/jquery/jquery",
+        underscore: "../lib/underscore/underscore"
     },
     shim: {
         backbone: {
@@ -89,7 +89,7 @@ require(["backbone", "bootstrap"], function (Backbone) {
 
     var renderEndpointJson = function () {
         $.ajax(
-            $("#url").val(), 
+            $("#url").val(),
             {
                 dataType: "jsonp",
                 success: function (data) {
