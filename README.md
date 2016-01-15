@@ -2,10 +2,9 @@
 
 Render arbitrary JSON endpoints
 
-## Prerequisites (OS X)
+## Prerequisites
 
-1. `brew update`
-2. `brew install docker-toolbox`
+This project is deployed with Docker. The easiest way to setup a Docker environment is by installing the [Docker Toolbox](https://www.docker.com/docker-toolbox).
 
 ## Local Deployment
 
