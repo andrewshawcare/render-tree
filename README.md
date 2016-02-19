@@ -2,8 +2,6 @@
 
 Render arbitrary JSON endpoints
 
-![Screenshot](./screenshot.png)
-
 ## Deployment
 
 ### Prerequisites
